@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test de Sustentabilidad</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* --- DEFINICIÓN DE LA FUENTE PILAT (DOS FAMILIAS CLARAS) --- */
+
+        /* 1. FAMILIA PILATWEB (NORMAL) - Para Cuerpo y Botones */
+        /* Pilat NORMAL Demi (Peso 400 - Predeterminado para el Cuerpo) */
+        @font-face {
+            font-family: 'PilatWeb';
+            src: url('fonts/Pilat-Demi.woff2') format('woff2'),
+                url('fonts/Pilat-Demi.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        /* Pilat NORMAL Bold (Peso 700 - Para Negritas y Botones) */
+        @font-face {
+            font-family: 'PilatDemiWeb';
+            src: url('fonts/Pilat-DemiBold.woff2') format('woff2'),
+                url('fonts/Pilat-DemiBold.ttf') format('truetype');
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
+        }
+
+
+        /* 2. FAMILIA PILATWIDEWEB (ANCHO) - Para Título H2 ("GUEST WIFI") */
+        @font-face {
+            font-family: 'PilatWideWeb';
+            /* Usamos PilatWide-Bold, ya que el título siempre es ancho y fuerte */
+            src: url('fonts/PilatWide-Bold.woff2') format('woff2'),
+                url('fonts/PilatWide-Bold.ttf') format('truetype');
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        /* --- FIN DEFINICIÓN DE FUENTES --- */
+        :root {
+            --primary-color: #2c3e50;
+            --card-bg: rgba(255, 255, 255, 0.90);
+            --text-color: #333333;
+            --color-planeta: #00ca65;
+            --color-personas: #ff1953;
+            --color-comunidad: #ffa03b;
+            --color-conducta: #2b1156;
+        }
+
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: 'PilatWeb', Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+            align-items: center;
+            background: radial-gradient(circle at 50% 20%, #2f3e75 0%, #171d3d 50%, #0a0d1a 100%);
+            background-attachment: fixed;
+            background-size: cover;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 950px;
+            background: var(--card-bg);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            font-family: 'PilatDemiWeb';
+        }
+
+        .step-indicator {
+            text-align: center;
+            color: #333;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+            font-family: 'PilatDemiWeb';
+        }
+
+        .welcome-screen {
+            text-align: left;
+            line-height: 1.6;
+            font-family: 'PilatDemiWeb';
+        }
+
+        .welcome-screen h2 {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 15px;
+            font-weight: 700;
+            font-size: 1.25rem;
+            font-family: 'PilatDemiWeb';
+        }
+
+        .welcome-text {
+            font-size: 0.98rem;
+            color: #222;
+            margin-bottom: 20px;
+            text-align: justify;
+            font-family: 'PilatDemiWeb';
+        }
+
+        /* --- NUEVAS ANIMACIONES PARA LOS PILARES --- */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .pillars-preview {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin: 20px auto;
+            max-width: 600px;
+
+        }
+
+        .pillar-tag {
+            padding: 14px 15px;
+            border-radius: 10px;
+            color: #ffffff;
+            font-weight: 800;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 0.95rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
+            /* Aplicando animación de entrada escalonada */
+            opacity: 0;
+            animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        /* Retrasos individuales para cada tarjeta */
+        .pillar-tag.planeta {
+            background-color: var(--color-planeta);
+            animation-delay: 0.1s;
+        }
+
+        .pillar-tag.personas {
+            background-color: var(--color-personas);
+            animation-delay: 0.2s;
+        }
+
+        .pillar-tag.comunidad {
+            background-color: var(--color-comunidad);
+            animation-delay: 0.3s;
+        }
+
+        .pillar-tag.conducta {
+            background-color: var(--color-conducta);
+            animation-delay: 0.4s;
+        }
+
+        /* Efecto Hover interactivo para las tarjetas */
+        .pillar-tag:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .pillar-tag img {
+            transition: transform 0.3s ease;
+        }
+
+        .pillar-tag:hover img {
+            transform: scale(1.15) rotate(5deg);
+        }
+
+        /* ------------------------------------------- */
+
+        .screen {
+            display: none;
+        }
+
+        .screen.active {
+            display: block;
+        }
+
+        .statement-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .statement-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px 18px;
+            border: 2px solid rgba(224, 224, 224, 0.8);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .statement-item input[type="checkbox"] {
+            display: none;
+        }
+
+        .statement-item label {
+            cursor: pointer;
+            font-size: 0.95rem;
+            line-height: 1.4;
+            width: 100%;
+            font-weight: 500;
+            color: #222;
+            font-family: 'PilatDemiWeb', sans-serif;
+        }
+
+        .statement-item.selected {
+            background: rgba(241, 248, 245, 0.95);
+            border-color: #27ae60;
+            font-family: 'PilatDemiWeb', sans-serif;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .center-btn {
+            display: flex;
+            justify-content: center;
+            margin-top: 25px;
+        }
+
+        .btn-dpworld {
+            background-color: #ffffff;
+            color: #2932a3;
+            border: 1.5px solid #2932a3;
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            transition: all 0.3s ease;
+            font-family: 'PilatWideWeb';
+            text-decoration: none;
+        }
+
+        .btn-dpworld .arrow-container {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background-color: #2932a3;
+            color: #ffffff;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .btn-dpworld:hover {
+            background-color: #2932a3;
+            color: #ffffff;
+        }
+
+        .btn-dpworld:hover .arrow-container {
+            background-color: #ffffff;
+            color: #2932a3;
+        }
+
+        .results-section h2 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-weight: 800;
+            font-family: 'PilatDemiWeb';
+        }
+
+        /* Desglose de Porcentajes */
+        .pillars-breakdown {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+            font-family: 'PilatWideWeb';
+        }
+
+        .breakdown-item {
+            padding: 10px 8px;
+            border-radius: 10px;
+            color: #ffffff;
+            font-weight: 700;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+            font-size: 0.8rem;
+        }
+
+        .breakdown-item.planeta {
+            background-color: var(--color-planeta);
+            color: #111;
+        }
+
+        .breakdown-item.personas {
+            background-color: var(--color-personas);
+        }
+
+        .breakdown-item.comunidad {
+            background-color: var(--color-comunidad);
+        }
+
+        .breakdown-item.conducta {
+            background-color: var(--color-conducta);
+        }
+
+        .breakdown-item .pill-name {
+            font-size: 0.75rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .breakdown-item .pill-score {
+            font-size: 25px;
+            font-weight: 900;
+            background: rgba(0, 0, 0, 0.15);
+            padding: 2px 8px;
+            border-radius: 6px;
+            margin-top: 2px;
+        }
+
+        /* Pilar Principal */
+        .main-pillar-card {
+            padding: 24px;
+            border-radius: 12px;
+            color: white;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .main-pillar-card.planeta {
+            background-color: var(--color-planeta);
+            color: #111;
+        }
+
+        .main-pillar-card.personas {
+            background-color: var(--color-personas);
+            color: white;
+        }
+
+        .main-pillar-card.comunidad {
+            background-color: var(--color-comunidad);
+            color: white;
+        }
+
+        .main-pillar-card.conducta {
+            background-color: var(--color-conducta);
+            color: white;
+        }
+
+        .main-pillar-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.3rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            font-family: 'PilatWideWeb';
+        }
+
+        .main-pillar-header img.card-icon-img {
+            width: 55px;
+            height: 55px;
+            object-fit: contain;
+            filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.15));
+            font-family: 'PilatWideWeb';
+        }
+
+        /* Módulo de Actividades */
+        .activities-module {
+            background: #ffffff;
+            color: #333;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            font-family: 'PilatWideWeb';
+        }
+
+        .activities-module h3 {
+            margin-top: 0;
+            font-size: 0.95rem;
+            color: var(--primary-color);
+            letter-spacing: 0.5px;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 10px;
+            font-family: 'PilatWideWeb';
+        }
+
+        .activities-list {
+            margin: 10px 0 0 20px;
+            padding: 0;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            font-family: 'PilatWideWeb';
+        }
+
+        /* Sección otros pilares (Flip Cards) */
+        .other-pillars-section h3 {
+            text-align: center;
+            color: var(--primary-color);
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            letter-spacing: 0.5px;
+            font-family: 'PilatWideWeb';
+        }
+
+        .other-pillars-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+            font-family: 'PilatWideWeb';
+
+        }
+
+        .flip-card {
+            background-color: transparent;
+            perspective: 1000px;
+            height: 310px;
+            width: 100%;
+            font-family: 'PilatWideWeb';
+
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+            transform-style: preserve-3d;
+            border-radius: 16px;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+            font-family: 'PilatWideWeb';
+
+        }
+
+        .flip-card:hover .flip-card-inner,
+        .flip-card.flipped .flip-card-inner {
+            transform: rotateY(180deg);
+            font-family: 'PilatWideWeb';
+
+        }
+
+        .flip-card-front,
+        .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 20px;
+            box-sizing: border-box;
+            font-family: 'PilatWideWeb';
+
+        }
+
+        .flip-card-front.planeta {
+            background-color: var(--color-planeta);
+            color: #111;
+        }
+
+        .flip-card-front.personas {
+            background-color: var(--color-personas);
+            color: white;
+        }
+
+        .flip-card-front.comunidad {
+            background-color: var(--color-comunidad);
+            color: white;
+        }
+
+        .flip-card-front.conducta {
+            background-color: var(--color-conducta);
+            color: white;
+        }
+
+        .card-top-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+        }
+
+        .card-icon-white {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card-icon-white img.card-icon-img {
+            width: 52px;
+            height: 52px;
+            object-fit: contain;
+            filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.15));
+        }
+
+        .card-title-pill {
+            background: #ffffff;
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-weight: 800;
+            font-size: 0.85rem;
+            display: inline-flex;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .planeta .card-title-pill {
+            color: #111;
+        }
+
+        .personas .card-title-pill {
+            color: var(--color-personas);
+        }
+
+        .comunidad .card-title-pill {
+            color: var(--color-comunidad);
+        }
+
+        .conducta .card-title-pill {
+            color: var(--color-conducta);
+        }
+
+        .card-body-text {
+            font-size: 0.85rem;
+            line-height: 1.4;
+            text-align: center;
+            margin: auto 0;
+            font-weight: 500;
+        }
+
+        .card-btn-activities {
+            background: #ffffff;
+            border: none;
+            padding: 10px 0;
+            border-radius: 30px;
+            font-weight: 800;
+            font-size: 0.85rem;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-transform: uppercase;
+            width: 100%;
+            transition: background 0.2s;
+        }
+
+        .planeta .card-btn-activities {
+            color: var(--color-planeta);
+        }
+
+        .personas .card-btn-activities {
+            color: var(--color-personas);
+        }
+
+        .comunidad .card-btn-activities {
+            color: var(--color-comunidad);
+        }
+
+        .conducta .card-btn-activities {
+            color: var(--color-conducta);
+        }
+
+        .flip-card-back {
+            background-color: #ffffff;
+            color: #333;
+            transform: rotateY(180deg);
+            text-align: left;
+            overflow-y: auto;
+            border: 2px solid #eaeaea;
+        }
+
+        .flip-card-back h4 {
+            margin: 0 0 10px 0;
+            font-size: 0.9rem;
+            color: var(--primary-color);
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 6px;
+        }
+
+        .flip-card-back ul {
+            margin: 0;
+            padding-left: 15px;
+            font-size: 0.78rem;
+            line-height: 1.5;
+            color: #444;
+        }
+
+        .flip-card-back li {
+            margin-bottom: 6px;
+        }
+
+        /* Módulo Firma de Correo Estilizado */
+        .signature-section {
+            margin-top: 35px;
+            background: #ffffff;
+            padding: 30px 20px;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            font-family: 'PilatWideWeb';
+        }
+
+        .signature-section h2 {
+            margin-top: 0;
+            margin-bottom: 8px;
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            font-weight: 800;
+            font-family: 'PilatWideWeb';
+        }
+
+        .signature-section p {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            font-family: 'PilatWideWeb';
+        }
+
+        .signature-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            font-family: 'PilatWideWeb';
+        }
+
+        .sig-tab-btn {
+            background: #ffffff;
+            border: 2px solid #2c3e50;
+            color: #2c3e50;
+            padding: 8px 22px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: 'PilatWideWeb';
+            text-transform: uppercase;
+        }
+
+        .sig-tab-btn:hover {
+            opacity: 0.85;
+        }
+
+        .sig-tab-btn.active-tab.planeta-tab {
+            background-color: var(--color-planeta);
+            border-color: var(--color-planeta);
+            color: #111;
+        }
+
+        .sig-tab-btn.active-tab.personas-tab {
+            background-color: var(--color-personas);
+            border-color: var(--color-personas);
+            color: #ffffff;
+        }
+
+        .sig-tab-btn.active-tab.comunidad-tab {
+            background-color: var(--color-comunidad);
+            border-color: var(--color-comunidad);
+            color: #ffffff;
+        }
+
+        .sig-tab-btn.active-tab.conducta-tab {
+            background-color: var(--color-conducta);
+            border-color: var(--color-conducta);
+            color: #ffffff;
+        }
+
+        .signature-preview-container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto 20px auto;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            background: #fff;
+            border: 1px solid #e0e0e0;
+        }
+
+        .signature-preview-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .center-btn-download {
+            display: flex;
+            justify-content: center;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+
+<body id="page-body">
+    <div class="container">
+        <h1>Test de Sustentabilidad</h1>
+
+        <div class="screen active" id="screen-welcome">
+            <div class="welcome-screen">
+                <h2>Nuestro mundo, nuestro futuro: donde el comercio se une a un propósito</h2>
+                <div class="welcome-text">
+                    <p>¡Te damos la bienvenida! Este test está diseñado para descubrir cómo tus valores y
+                        decisiones cotidianas se alinean con la estrategia de sustentabilidad de la compañía.</p>
+                    <p>A través de un breve cuestionario de 5 pasos, analizaremos tus preferencias para mostrarte con
+                        cuál de nuestros cuatro pilares fundamentales te identificas más fuertemente:</p>
+                </div>
+                <div class="pillars-preview">
+                    <div class="pillar-tag planeta"><img src="img/01_planeta.png" alt="planeta" width="50"
+                            height="50"><span>PLANETA</span></div>
+                    <div class="pillar-tag personas"><img src="img/02_personas.png" alt="personas" width="50"
+                            height="50"><span>PERSONAS</span></div>
+                    <div class="pillar-tag comunidad"><img src="img/03_comunidad.png" alt="comunidad" width="50"
+                            height="50"><span>COMUNIDAD</span></div>
+                    <div class="pillar-tag conducta"><img src="img/04_conducta.png" alt="conducta" width="50"
+                            height="50"><span>CONDUCTA</span></div>
+                </div>
+                <div class="welcome-text" style="margin-top: 15px;">
+                    <p>Al finalizar, conocerás tu perfil de impacto y tendrás la oportunidad de inscribirte en
+                        iniciativas específicas del pilar que mejor te representa, además de llevarte un banner
+                        personalizado para tu firma de correo. ¡Juntos podemos traducir nuestros compromisos en acciones
+                        concretas!</p>
+                </div>
+            </div>
+            <div class="center-btn">
+                <button class="btn-dpworld" onclick="cambiarPantalla('welcome', 1)">COMENZAR TEST <span
+                        class="arrow-container">→</span></button>
+            </div>
+        </div>
+
+        <div class="screen" id="screen-1">
+            <div class="step-indicator">Pantalla 1 de 5</div>
+            <div class="statement-list" id="list-1"></div>
+            <div class="btn-container"><button class="btn-dpworld" onclick="cambiarPantalla(1, 'welcome')"><span
+                        class="arrow-container">←</span> ANTERIOR</button><button class="btn-dpworld"
+                    onclick="cambiarPantalla(1, 2)">SIGUIENTE <span class="arrow-container">→</span></button></div>
+        </div>
+        <div class="screen" id="screen-2">
+            <div class="step-indicator">Pantalla 2 de 5</div>
+            <div class="statement-list" id="list-2"></div>
+            <div class="btn-container"><button class="btn-dpworld" onclick="cambiarPantalla(2, 1)"><span
+                        class="arrow-container">←</span> ANTERIOR</button><button class="btn-dpworld"
+                    onclick="cambiarPantalla(2, 3)">SIGUIENTE <span class="arrow-container">→</span></button></div>
+        </div>
+        <div class="screen" id="screen-3">
+            <div class="step-indicator">Pantalla 3 de 5</div>
+            <div class="statement-list" id="list-3"></div>
+            <div class="btn-container"><button class="btn-dpworld" onclick="cambiarPantalla(3, 2)"><span
+                        class="arrow-container">←</span> ANTERIOR</button><button class="btn-dpworld"
+                    onclick="cambiarPantalla(3, 4)">SIGUIENTE <span class="arrow-container">→</span></button></div>
+        </div>
+        <div class="screen" id="screen-4">
+            <div class="step-indicator">Pantalla 4 de 5</div>
+            <div class="statement-list" id="list-4"></div>
+            <div class="btn-container"><button class="btn-dpworld" onclick="cambiarPantalla(4, 3)"><span
+                        class="arrow-container">←</span> ANTERIOR</button><button class="btn-dpworld"
+                    onclick="cambiarPantalla(4, 5)">SIGUIENTE <span class="arrow-container">→</span></button></div>
+        </div>
+        <div class="screen" id="screen-5">
+            <div class="step-indicator">Pantalla 5 de 5</div>
+            <div class="statement-list" id="list-5"></div>
+            <div class="btn-container"><button class="btn-dpworld" onclick="cambiarPantalla(5, 4)"><span
+                        class="arrow-container">←</span> ANTERIOR</button><button class="btn-dpworld"
+                    onclick="calcularResultados()">VER RESULTADOS <span class="arrow-container">→</span></button></div>
+        </div>
+
+        <div class="screen results-section" id="screen-results">
+            <h2>Tus Resultados del TEST!</h2>
+
+            <div class="pillars-breakdown" id="pillarsBreakdownContainer"></div>
+
+            <div id="mainPillarSection"></div>
+
+            <div class="activities-module">
+                <h3>ESTAS SON LAS ACTIVIDADES QUE TENEMOS PENSADAS PARA VOS</h3>
+                <ul class="activities-list" id="activitiesListContent"></ul>
+            </div>
+
+            <div class="other-pillars-section">
+                <h3>CONOCÉ LOS DEMÁS PILARES</h3>
+                <div class="other-pillars-grid" id="otherPillarsContainer"></div>
+            </div>
+
+            <div class="signature-section">
+                <h2>Personalizá tu firma de correo</h2>
+                <p>Descargá tu firma de mail y elegí el pilar desde el que querés generar impacto</p>
+
+                <div class="signature-tabs" id="signatureTabsContainer">
+                    <button class="sig-tab-btn" onclick="cambiarBannerFirma('comunidad')">Comunidad</button>
+                    <button class="sig-tab-btn" onclick="cambiarBannerFirma('personas')">Personas</button>
+                    <button class="sig-tab-btn" onclick="cambiarBannerFirma('planeta')">Planeta</button>
+                    <button class="sig-tab-btn" onclick="cambiarBannerFirma('conducta')">Conducta</button>
+                </div>
+
+                <div class="signature-preview-container" id="signaturePreviewContainer"></div>
+                <div class="center-btn-download">
+                    <a id="downloadLinkBtn" href="#" download class="btn-dpworld"
+                        style="text-decoration: none;font-family: 'PilatWideWeb';">
+                        DESCARGAR BANNER CONDUCTA <span class="arrow-container">↓</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const poolAfirmaciones = [
+            { text: "Siempre pienso en cómo reducir mi impacto en el ambiente.", pillar: "planeta", screen: 1 },
+            { text: "Me gusta ayudar a que quienes me rodean se sientan parte del equipo.", pillar: "personas", screen: 1 },
+            { text: "Me gusta participar en iniciativas que generan un impacto positivo.", pillar: "comunidad", screen: 1 },
+            { text: "Me gusta actuar con responsabilidad y dar el ejemplo.", pillar: "conducta", screen: 1 },
+            { text: "Soy consciente y reutilizo todo lo que puedo", pillar: "planeta", screen: 1 },
+            { text: "Disfruto aprender cosas nuevas y compartirlas con los demás.", pillar: "personas", screen: 2 },
+            { text: "Disfruto colaborar cuando alguien necesita una mano.", pillar: "comunidad", screen: 2 },
+            { text: "Creo que la confianza se construye con acciones, no con palabras.", pillar: "conducta", screen: 2 },
+            { text: "Creo que las pequeñas acciones pueden generar grandes cambios.", pillar: "planeta", screen: 2 },
+            { text: "Me motiva ver crecer a las personas.", pillar: "personas", screen: 2 },
+            { text: "Me interesa que mi trabajo también tenga un impacto fuera de la empresa.", pillar: "comunidad", screen: 3 },
+            { text: "Creo que el respeto es la base de cualquier relación.", pillar: "conducta", screen: 3 },
+            { text: "Me preocupa el futuro del planeta y quiero contribuir a cuidarlo.", pillar: "planeta", screen: 3 },
+            { text: "Cuando veo una situación de riesgo, freno la actividad y le aviso a superior", pillar: "personas", screen: 3 },
+            { text: "Pienso que juntos logramos cambios más grandes que individualmente", pillar: "comunidad", screen: 3 },
+            { text: "Considero que un buen clima laboral hace la diferencia.", pillar: "conducta", screen: 4 },
+            { text: "Las actividades de sustentabilidad que más me gustan son las que tienen impacto ambiental como Limpieza de Costas.", pillar: "planeta", screen: 4 },
+            { text: "Las actividades de sustentabilidad que más me gustan involucran mi bienestar, como la Carrera Verde.", pillar: "personas", screen: 4 },
+            { text: "Las actividades que más disfruto generan cambio positivo a comunidades como el Programa de Educación.", pillar: "comunidad", screen: 4 },
+            { text: "Las actividades que me interesan se enfocan en mejorar el clima laboral, como la capacitación del convenio 190.", pillar: "conducta", screen: 4 },
+            { text: "Busco constantemente formas de optimizar procesos sin descuidar los recursos naturales.", pillar: "planeta", screen: 5 },
+            { text: "Fomento un espacio seguro donde cada colaborador pueda expresar sus ideas libremente.", pillar: "personas", screen: 5 },
+            { text: "Dedico tiempo a identificar necesidades en el entorno social que nos rodea.", pillar: "comunidad", screen: 5 },
+            { text: "Tomo decisiones basadas en principios éticos sólidos, incluso bajo presión.", pillar: "conducta", screen: 5 },
+            { text: "Me comprometo activamente con las metas ecológicas a largo plazo de la organización.", pillar: "planeta", screen: 5 }
+        ];
+
+        const datosPilares = {
+            planeta: {
+                nombre: "PLANETA",
+                iconoImg: "img/01_planeta.png",
+                explicacionParaPersonas: "Cuidamos nuestro entorno para garantizar un futuro sostenible.",
+                actividades: ["Voluntariado de Plantación de Árboles", "Voluntariado de Limpieza de Costas", "Capacitación de Regeneración"],
+                bannerImg: "firmas_pilares_firm01.png"
+            },
+            personas: {
+                nombre: "PERSONAS",
+                iconoImg: "img/02_personas.png",
+                explicacionParaPersonas: "Promovemos la salud, seguridad y el desarrollo de nuestros colaboradores desde el respeto y la equidad.",
+                actividades: ["Comité de Sustentabilidad", "Taller Día de la Mujer"],
+                bannerImg: "firmas_pilares-02.png"
+            },
+            comunidad: {
+                nombre: "COMUNIDAD",
+                iconoImg: "img/03_comunidad.png",
+                explicacionParaPersonas: "Generamos impacto positivo en las comunidades donde operamos a través de la responsabilidad social corporativa.",
+                actividades: ["Programa de Educación", "Voluntariado Día de la Niñez", "Campaña de Donación de Sangre"],
+                bannerImg: "firmas_pilares-03.png"
+            },
+            conducta: {
+                nombre: "CONDUCTA",
+                iconoImg: "img/04_conducta.png",
+                explicacionParaPersonas: "Actuamos con integridad, transparencia y responsabilidad en cada decisión y acción.",
+                actividades: ["Talleres CONVENIO 190 - OIT 'Violencia y Acoso Laboral'"],
+                bannerImg: "firmas_pilares-04.png"
+            }
+        };
+
+        function inicializarTest() {
+            for (let i = 1; i <= 5; i++) {
+                const contenedor = document.getElementById(`list-${i}`);
+                const itemsScreen = poolAfirmaciones.filter(item => item.screen === i);
+                itemsScreen.forEach((item, index) => {
+                    const globalIndex = `s${i}_${index}`;
+                    const div = document.createElement('div');
+                    div.className = 'statement-item';
+                    div.innerHTML = `<input type="checkbox" id="${globalIndex}" value="${item.pillar}"><label>${item.text}</label>`;
+                    div.onclick = function () {
+                        const checkbox = div.querySelector('input');
+                        checkbox.checked = !checkbox.checked;
+                        checkbox.checked ? div.classList.add('selected') : div.classList.remove('selected');
+                    };
+                    contenedor.appendChild(div);
+                });
+            }
+        }
+
+        function cambiarPantalla(actual, siguiente) {
+            let actualId = (actual === 'welcome') ? 'screen-welcome' : `screen-${actual}`;
+            let siguienteId = (siguiente === 'welcome') ? 'screen-welcome' : `screen-${siguiente}`;
+            document.getElementById(actualId).classList.remove('active');
+            document.getElementById(siguienteId).classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function cambiarBannerFirma(pilarId) {
+            const buttons = document.querySelectorAll('.sig-tab-btn');
+            buttons.forEach(btn => {
+                btn.className = 'sig-tab-btn';
+            });
+            const clickedBtn = Array.from(buttons).find(b => b.textContent.toLowerCase() === pilarId.toLowerCase());
+            if (clickedBtn) {
+                clickedBtn.classList.add('active-tab', `${pilarId}-tab`);
+            }
+
+            const info = datosPilares[pilarId];
+            const previewContainer = document.getElementById('signaturePreviewContainer');
+            const downloadBtn = document.getElementById('downloadLinkBtn');
+
+            previewContainer.innerHTML = `<img src="${info.bannerImg}" alt="Banner de firma ${info.nombre}">`;
+            downloadBtn.href = info.bannerImg;
+            downloadBtn.setAttribute('download', `Banner_Firma_${info.nombre}.png`);
+            downloadBtn.innerHTML = `DESCARGAR BANNER ${info.nombre} <span class="arrow-container">↓</span>`;
+        }
+
+        function calcularResultados() {
+            const totales = { planeta: 0, personas: 0, comunidad: 0, conducta: 0 };
+            const seleccionadas = document.querySelectorAll('.statement-item input[type="checkbox"]:checked');
+
+            if (seleccionadas.length === 0) {
+                alert("Por favor, selecciona al menos una afirmación.");
+                return;
+            }
+
+            seleccionadas.forEach(chk => {
+                if (totales.hasOwnProperty(chk.value)) totales[chk.value]++;
+            });
+
+            const totalSelecciones = seleccionadas.length;
+
+            // 1. Calcular porcentajes exactos (con decimales)
+            let porcentajesExactos = {
+                planeta: (totales.planeta / totalSelecciones) * 100,
+                personas: (totales.personas / totalSelecciones) * 100,
+                comunidad: (totales.comunidad / totalSelecciones) * 100,
+                conducta: (totales.conducta / totalSelecciones) * 100
+            };
+
+            // 2. Aplicar el método de "Mayor Resto" para que sumen exactamente 100%
+            let porcentajesFinales = {};
+            let restos = [];
+            let sumaEnteros = 0;
+
+            for (let p in porcentajesExactos) {
+                let valorEntero = Math.floor(porcentajesExactos[p]);
+                porcentajesFinales[p] = valorEntero;
+                sumaEnteros += valorEntero;
+                restos.push({ id: p, resto: porcentajesExactos[p] - valorEntero });
+            }
+
+            restos.sort((a, b) => b.resto - a.resto);
+
+            let puntosFaltantes = 100 - sumaEnteros;
+            for (let i = 0; i < puntosFaltantes; i++) {
+                porcentajesFinales[restos[i].id]++;
+            }
+
+            const porcentajesArray = Object.keys(porcentajesFinales).map(k => ({ id: k, val: porcentajesFinales[k] }));
+            porcentajesArray.sort((a, b) => b.val - a.val);
+
+            const breakdownContainer = document.getElementById('pillarsBreakdownContainer');
+            breakdownContainer.innerHTML = '';
+            porcentajesArray.forEach(item => {
+                const p = datosPilares[item.id];
+                const div = document.createElement('div');
+                div.className = `breakdown-item ${item.id}`;
+                div.innerHTML = `
+                    <div class="pill-name"><img src="${p.iconoImg}" class="card-icon-img" style="width:50px; height:50px;" alt=""> ${p.nombre}</div>
+                    <div class="pill-score">${item.val}%</div>
+                `;
+                breakdownContainer.appendChild(div);
+            });
+
+            const maxVal = porcentajesArray[0].val;
+            const principales = porcentajesArray.filter(item => item.val === maxVal);
+            const otros = porcentajesArray.filter(item => item.val < maxVal);
+
+            const mainPillarSection = document.getElementById('mainPillarSection');
+            mainPillarSection.innerHTML = '';
+
+            principales.forEach(item => {
+                const pilarInfo = datosPilares[item.id];
+                const cardDiv = document.createElement('div');
+                cardDiv.className = `main-pillar-card ${item.id}`;
+                cardDiv.innerHTML = `
+                    <div class="main-pillar-header">
+                        <img src="${pilarInfo.iconoImg}" class="card-icon-img" alt="">
+                        <span>PILAR PRINCIPAL: ${pilarInfo.nombre} (${item.val}%)</span>
+                    </div>
+                    <p style="margin: 0; line-height: 1.6; font-size: 1.05rem;">Para nosotros, el pilar ${pilarInfo.nombre} significa: ${pilarInfo.explicacionParaPersonas}</p>
+                `;
+                mainPillarSection.appendChild(cardDiv);
+            });
+
+            // 3. Actividades diferenciadas por pilar con sus colores correspondientes
+            let actividadesHTML = '';
+            principales.forEach(item => {
+                const pInfo = datosPilares[item.id];
+                actividadesHTML += `
+                <li style="list-style: none; margin-bottom: 15px; margin-left: -20px;">
+                    <strong style="color: var(--color-${item.id}); font-size: 1.05rem;">${pInfo.nombre}:</strong>
+                    <ul style="margin-top: 5px; padding-left: 20px;">
+                        ${pInfo.actividades.map(act => `<li>${act}</li>`).join('')}
+                    </ul>
+                </li>`;
+            });
+            document.getElementById('activitiesListContent').innerHTML = actividadesHTML;
+
+            const otherContainer = document.getElementById('otherPillarsContainer');
+            otherContainer.innerHTML = '';
+
+            otros.forEach(item => {
+                const p = datosPilares[item.id];
+                const flipCard = document.createElement('div');
+                flipCard.className = 'flip-card';
+                flipCard.innerHTML = `
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front ${item.id}">
+                            <div class="card-top-row">
+                                <span class="card-icon-white"><img src="${p.iconoImg}" class="card-icon-img" alt=""></span>
+                                <div class="card-title-pill">${p.nombre}</div>
+                            </div>
+                            <div class="card-body-text">${p.explicacionParaPersonas}</div>
+                            <button class="card-btn-activities" onclick="this.closest('.flip-card').classList.toggle('flipped')">ACTIVIDADES</button>
+                        </div>
+                        <div class="flip-card-back">
+                            <h4>Actividades - ${p.nombre}</h4>
+                            <ul>${p.actividades.map(a => `<li>${a}</li>`).join('')}</ul>
+                            <button class="card-btn-activities" style="margin-top:auto;" onclick="this.closest('.flip-card').classList.remove('flipped')">VOLVER</button>
+                        </div>
+                    </div>
+                `;
+                otherContainer.appendChild(flipCard);
+            });
+
+            const otherPillarsSectionElement = document.querySelector('.other-pillars-section');
+            if (otros.length === 0) {
+                otherPillarsSectionElement.style.display = 'none';
+            } else {
+                otherPillarsSectionElement.style.display = 'block';
+            }
+
+            cambiarBannerFirma(principales[0].id);
+
+            document.getElementById('screen-5').classList.remove('active');
+            document.getElementById('screen-results').classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        window.onload = inicializarTest;
+    </script>
+</body>
+
+</html>
+```[cite: 1]
