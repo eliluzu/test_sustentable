@@ -30,6 +30,14 @@
             font-display: swap;
         }
 
+        @font-face {
+            font-family: 'PilatLightWeb';
+            src: url('fonts/Pilat-Light.woff2') format('woff2'),
+                url('fonts/Pilat-Light.ttf') format('truetype');
+            font-weight: 300;
+            font-style: normal;
+            font-display: swap;
+        }
 
         /* 2. FAMILIA PILATWIDEWEB (ANCHO) - Para Título H2 ("GUEST WIFI") */
         @font-face {
@@ -84,7 +92,8 @@
             margin-bottom: 5px;
             font-weight: 800;
             letter-spacing: -0.5px;
-            font-family: 'PilatDemiWeb';
+            font-family: 'PilatWideWeb';
+
         }
 
         .step-indicator {
@@ -112,11 +121,12 @@
         }
 
         .welcome-text {
-            font-size: 0.98rem;
+            font-size: 1.15rem;
+            line-height: 1.15;
             color: #222;
             margin-bottom: 20px;
-            text-align: justify;
-            font-family: 'PilatDemiWeb';
+            text-align: center;
+            font-family: 'PilatLightWeb';
         }
 
         /* --- NUEVAS ANIMACIONES PARA LOS PILARES --- */
@@ -151,7 +161,7 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
-            font-size: 0.95rem;
+            font-size: 1.25rem;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 
             /* Aplicando animación de entrada escalonada */
@@ -231,7 +241,7 @@
 
         .statement-item label {
             cursor: pointer;
-            font-size: 0.95rem;
+            font-size: 1.05rem;
             line-height: 1.4;
             width: 100%;
             font-weight: 500;
@@ -331,7 +341,7 @@
 
         .breakdown-item.planeta {
             background-color: var(--color-planeta);
-            color: #111;
+            color: #fff;
         }
 
         .breakdown-item.personas {
@@ -347,7 +357,7 @@
         }
 
         .breakdown-item .pill-name {
-            font-size: 0.75rem;
+            font-size: 1.15rem;
             font-weight: 800;
             display: flex;
             align-items: center;
@@ -355,11 +365,9 @@
         }
 
         .breakdown-item .pill-score {
-            font-size: 25px;
+            font-size: 28px;
             font-weight: 900;
-            background: rgba(0, 0, 0, 0.15);
             padding: 2px 8px;
-            border-radius: 6px;
             margin-top: 2px;
         }
 
@@ -374,7 +382,7 @@
 
         .main-pillar-card.planeta {
             background-color: var(--color-planeta);
-            color: #111;
+            color: #fff;
         }
 
         .main-pillar-card.personas {
@@ -396,7 +404,7 @@
             display: flex;
             align-items: center;
             gap: 15px;
-            font-size: 1.3rem;
+            font-size: 1.15rem;
             font-weight: 800;
             margin-bottom: 15px;
             font-family: 'PilatWideWeb';
@@ -505,7 +513,7 @@
 
         .flip-card-front.planeta {
             background-color: var(--color-planeta);
-            color: #111;
+            color: white;
         }
 
         .flip-card-front.personas {
@@ -556,7 +564,7 @@
         }
 
         .planeta .card-title-pill {
-            color: #111;
+            color: #00ca65;
         }
 
         .personas .card-title-pill {
@@ -695,7 +703,7 @@
         .sig-tab-btn.active-tab.planeta-tab {
             background-color: var(--color-planeta);
             border-color: var(--color-planeta);
-            color: #111;
+            color: #fff;
         }
 
         .sig-tab-btn.active-tab.personas-tab {
@@ -743,16 +751,19 @@
 
 <body id="page-body">
     <div class="container">
-        <h1>Test de Sustentabilidad</h1>
+        <h1>TEST DE SUSTENTABILIDAD</h1>
 
         <div class="screen active" id="screen-welcome">
             <div class="welcome-screen">
                 <h2>Nuestro mundo, nuestro futuro: donde el comercio se une a un propósito</h2>
                 <div class="welcome-text">
-                    <p>¡Te damos la bienvenida! Este test está diseñado para descubrir cómo tus valores y
-                        decisiones cotidianas se alinean con la estrategia de sustentabilidad de la compañía.</p>
-                    <p>A través de un breve cuestionario de 5 pasos, analizaremos tus preferencias para mostrarte con
-                        cuál de nuestros cuatro pilares fundamentales te identificas más fuertemente:</p>
+                    <p>¡Te damos la bienvenida! Este test está diseñado para descubrir cómo tus<strong> valores y
+                            decisiones cotidianas</strong> se alinean con la <strong> estrategia de sustentabilidad de
+                            la compañía.</strong></p>
+                    <p>A través de un breve cuestionario de <strong> 5 pasos</strong> , analizaremos tus preferencias
+                        para mostrarte con
+                        cuál de nuestros <strong> cuatro pilares fundamentales</strong> te identificas más fuertemente:
+                    </p>
                 </div>
                 <div class="pillars-preview">
                     <div class="pillar-tag planeta"><img src="img/01_planeta.png" alt="planeta" width="50"
@@ -765,10 +776,14 @@
                             height="50"><span>CONDUCTA</span></div>
                 </div>
                 <div class="welcome-text" style="margin-top: 15px;">
-                    <p>Al finalizar, conocerás tu perfil de impacto y tendrás la oportunidad de inscribirte en
-                        iniciativas específicas del pilar que mejor te representa, además de llevarte un banner
-                        personalizado para tu firma de correo. ¡Juntos podemos traducir nuestros compromisos en acciones
-                        concretas!</p>
+                    <p>Al finalizar, conocerás tu <strong> perfil de impacto </strong>y tendrás la oportunidad
+                        de<strong> inscribirte en
+                            actividades específicas del pilar </strong>que mejor te representa, además de llevarte un
+                        banner
+                        personalizado para tu firma de correo. <br><strong>¡Juntos podemos traducir nuestros
+                            compromisos en
+                            acciones
+                            concretas!</strong></p>
                 </div>
             </div>
             <div class="center-btn">
@@ -814,7 +829,7 @@
         </div>
 
         <div class="screen results-section" id="screen-results">
-            <h2>Tus Resultados del TEST!</h2>
+            <h2>Tu perfil de impacto se alinea principalmente con:</h2>
 
             <div class="pillars-breakdown" id="pillarsBreakdownContainer"></div>
 
@@ -1033,7 +1048,7 @@
                         <img src="${pilarInfo.iconoImg}" class="card-icon-img" alt="">
                         <span>PILAR PRINCIPAL: ${pilarInfo.nombre} (${item.val}%)</span>
                     </div>
-                    <p style="margin: 0; line-height: 1.6; font-size: 1.05rem;">Para nosotros, el pilar ${pilarInfo.nombre} significa: ${pilarInfo.explicacionParaPersonas}</p>
+                    <p style="margin: 0; line-height: 1.6; font-size: 1.05rem;color:#fff;">Para nosotros, el pilar ${pilarInfo.nombre} significa: ${pilarInfo.explicacionParaPersonas}</p>
                 `;
                 mainPillarSection.appendChild(cardDiv);
             });
