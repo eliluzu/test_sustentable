@@ -10,7 +10,6 @@
         /* --- DEFINICIÓN DE LA FUENTE PILAT (DOS FAMILIAS CLARAS) --- */
 
         /* 1. FAMILIA PILATWEB (NORMAL) - Para Cuerpo y Botones */
-        /* Pilat NORMAL Demi (Peso 400 - Predeterminado para el Cuerpo) */
         @font-face {
             font-family: 'PilatWeb';
             src: url('fonts/Pilat-Demi.woff2') format('woff2'),
@@ -20,7 +19,6 @@
             font-display: swap;
         }
 
-        /* Pilat NORMAL Bold (Peso 700 - Para Negritas y Botones) */
         @font-face {
             font-family: 'PilatDemiWeb';
             src: url('fonts/Pilat-DemiBold.woff2') format('woff2'),
@@ -39,10 +37,9 @@
             font-display: swap;
         }
 
-        /* 2. FAMILIA PILATWIDEWEB (ANCHO) - Para Título H2 ("GUEST WIFI") */
+        /* 2. FAMILIA PILATWIDEWEB (ANCHO) - Para Títulos */
         @font-face {
             font-family: 'PilatWideWeb';
-            /* Usamos PilatWide-Bold, ya que el título siempre es ancho y fuerte */
             src: url('fonts/PilatWide-Bold.woff2') format('woff2'),
                 url('fonts/PilatWide-Bold.ttf') format('truetype');
             font-weight: 700;
@@ -89,20 +86,86 @@
         h1 {
             text-align: center;
             color: var(--primary-color);
-            margin-bottom: 5px;
+            margin-bottom: 20px;
             font-weight: 800;
             letter-spacing: -0.5px;
             font-family: 'PilatWideWeb';
+        }
 
+        /* --- BARRA STICKY DE PROGRESO CON PANTALLA A LA IZQUIERDA --- */
+        .progress-sticky-bar {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 14px 20px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            z-index: 100;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .progress-sticky-title {
+            font-family: 'PilatWideWeb';
+            font-size: 0.95rem;
+            color: var(--primary-color);
+            font-weight: 800;
+        }
+
+        .progress-sticky-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex: 1;
+            max-width: 350px;
+            justify-content: flex-end;
+        }
+
+        .progress-text-label {
+            font-family: 'PilatDemiWeb';
+            font-size: 0.85rem;
+            color: #555;
+            white-space: nowrap;
+            font-weight: 700;
+        }
+
+        .progress-track {
+            flex-grow: 1;
+            height: 8px;
+            background-color: #e0e0e0;
+            border-radius: 4px;
+            overflow: hidden;
+            max-width: 180px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            background-color: #2932a3;
+            border-radius: 4px;
+            transition: width 0.4s ease;
         }
 
         .step-indicator {
             text-align: center;
             color: #333;
             font-size: 0.9rem;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             font-weight: 700;
             font-family: 'PilatDemiWeb';
+        }
+
+        .step-indicator h4 {
+            text-align: left;
+            color: #333;
+            font-size: 16px;
+            margin-bottom: 25px;
+            font-weight: 700;
+            font-family: 'PilatLightWeb';
         }
 
         .welcome-screen {
@@ -127,19 +190,17 @@
             margin-bottom: 20px;
             text-align: center;
             font-family: 'PilatLightWeb';
+
         }
 
-        /* --- NUEVAS ANIMACIONES PARA LOS PILARES --- */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(25px);
-            }
+        .h4 {
+            font-size: 1.15rem;
+            line-height: 1.15;
+            color: #222;
+            margin-bottom: 20px;
+            text-align: center;
+            font-family: 'PilatLightWeb';
 
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
 
         .pillars-preview {
@@ -148,65 +209,38 @@
             gap: 12px;
             margin: 20px auto;
             max-width: 600px;
-
         }
 
         .pillar-tag {
-            padding: 14px 15px;
-            border-radius: 10px;
+            padding: 10px 10px;
+            border-radius: 0px 20px 0px 20px;
             color: #ffffff;
-            font-weight: 800;
+            font-weight: 500;
             text-align: center;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            font-size: 1.25rem;
+            gap: 8px;
+            font-family: 'PilatWideWeb';
+            font-size: 1.20rem;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-
-            /* Aplicando animación de entrada escalonada */
-            opacity: 0;
-            animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            cursor: pointer;
         }
 
-        /* Retrasos individuales para cada tarjeta */
         .pillar-tag.planeta {
             background-color: var(--color-planeta);
-            animation-delay: 0.1s;
         }
 
         .pillar-tag.personas {
             background-color: var(--color-personas);
-            animation-delay: 0.2s;
         }
 
         .pillar-tag.comunidad {
             background-color: var(--color-comunidad);
-            animation-delay: 0.3s;
         }
 
         .pillar-tag.conducta {
             background-color: var(--color-conducta);
-            animation-delay: 0.4s;
         }
-
-        /* Efecto Hover interactivo para las tarjetas */
-        .pillar-tag:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        .pillar-tag img {
-            transition: transform 0.3s ease;
-        }
-
-        .pillar-tag:hover img {
-            transform: scale(1.15) rotate(5deg);
-        }
-
-        /* ------------------------------------------- */
 
         .screen {
             display: none;
@@ -315,18 +349,17 @@
             font-family: 'PilatDemiWeb';
         }
 
-        /* Desglose de Porcentajes */
         .pillars-breakdown {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 10px;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             font-family: 'PilatWideWeb';
         }
 
         .breakdown-item {
             padding: 10px 8px;
-            border-radius: 10px;
+            border-radius: 0px 20px 0px 20px;
             color: #ffffff;
             font-weight: 700;
             text-align: center;
@@ -371,83 +404,140 @@
             margin-top: 2px;
         }
 
-        /* Pilar Principal */
-        .main-pillar-card {
-            padding: 24px;
-            border-radius: 12px;
+        /* --- CONTENEDOR GRID PARA LOS PILARES PRINCIPALES EN DOS COLUMNAS --- */
+        #mainPillarSection {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        /* Si por alguna razón hay un número impar o es solo 1 principal, que ocupe todo el ancho o se ajuste bien */
+        #mainPillarSection .main-pillar-card-wrapper:only-child {
+            grid-column: span 2;
+        }
+
+        /* --- NUEVO ESTILO DE TARJETA UNIFICADA --- */
+        .main-pillar-card-wrapper {
+            background: #ffffff;
+            border-radius: 0px 20px 0px 20px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            border: 1px solid #eaeaea;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .main-pillar-top {
+            padding: 16px 18px;
             color: white;
-            margin-bottom: 15px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .main-pillar-card.planeta {
-            background-color: var(--color-planeta);
-            color: #fff;
-        }
-
-        .main-pillar-card.personas {
-            background-color: var(--color-personas);
-            color: white;
-        }
-
-        .main-pillar-card.comunidad {
-            background-color: var(--color-comunidad);
-            color: white;
-        }
-
-        .main-pillar-card.conducta {
-            background-color: var(--color-conducta);
-            color: white;
-        }
-
-        .main-pillar-header {
             display: flex;
             align-items: center;
-            gap: 15px;
-            font-size: 1.15rem;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .main-pillar-card-wrapper.planeta .main-pillar-top {
+            background-color: var(--color-planeta);
+        }
+
+        .main-pillar-card-wrapper.personas .main-pillar-top {
+            background-color: var(--color-personas);
+        }
+
+        .main-pillar-card-wrapper.comunidad .main-pillar-top {
+            background-color: var(--color-comunidad);
+        }
+
+        .main-pillar-card-wrapper.conducta .main-pillar-top {
+            background-color: var(--color-conducta);
+        }
+
+        .main-pillar-header-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95rem;
             font-weight: 800;
-            margin-bottom: 15px;
             font-family: 'PilatWideWeb';
         }
 
-        .main-pillar-header img.card-icon-img {
-            width: 55px;
-            height: 55px;
+        .main-pillar-header-left img.card-icon-img {
+            width: 38px;
+            height: 38px;
             object-fit: contain;
             filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.15));
+        }
+
+        /* Botón desplegable "¿Qué significa?" ubicado a la derecha */
+        .btn-q-significa {
+            background: rgba(255, 255, 255, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.78rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: background 0.2s ease;
             font-family: 'PilatWideWeb';
         }
 
-        /* Módulo de Actividades */
-        .activities-module {
-            background: #ffffff;
+        .btn-q-significa:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        /* Contenido desplegable de la explicación */
+        .pillar-explanation-content {
+            display: none;
+            padding: 15px 18px;
+            background: rgba(0, 0, 0, 0.03);
+            border-bottom: 1px solid #eaeaea;
+            font-size: 0.9rem;
             color: #333;
-            padding: 20px;
-            border-radius: 12px;
-            margin-bottom: 25px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            font-family: 'PilatWideWeb';
+            line-height: 1.5;
+            font-family: 'PilatDemiWeb';
         }
 
-        .activities-module h3 {
-            margin-top: 0;
-            font-size: 0.95rem;
+        .pillar-explanation-content.show {
+            display: block;
+        }
+
+        /* Sección inferior de actividades dentro de la misma tarjeta */
+        .activities-inner-section {
+            padding: 18px;
+            background: #ffffff;
+            font-family: 'PilatWideWeb';
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .activities-inner-section h3 {
+            margin: 0 0 10px 0;
+            font-size: 0.85rem;
             color: var(--primary-color);
             letter-spacing: 0.5px;
             border-bottom: 2px solid #f0f0f0;
-            padding-bottom: 10px;
+            padding-bottom: 6px;
             font-family: 'PilatWideWeb';
+            text-align: center;
         }
 
         .activities-list {
-            margin: 10px 0 0 20px;
-            padding: 0;
-            font-size: 0.95rem;
-            line-height: 1.6;
-            font-family: 'PilatWideWeb';
+            margin: 0;
+            padding-left: 18px;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: #333;
+            font-family: 'PilatDemiWeb', sans-serif;
         }
 
-        /* Sección otros pilares (Flip Cards) */
         .other-pillars-section h3 {
             text-align: center;
             color: var(--primary-color);
@@ -463,7 +553,6 @@
             gap: 15px;
             margin-bottom: 30px;
             font-family: 'PilatWideWeb';
-
         }
 
         .flip-card {
@@ -472,7 +561,6 @@
             height: 310px;
             width: 100%;
             font-family: 'PilatWideWeb';
-
         }
 
         .flip-card-inner {
@@ -485,14 +573,12 @@
             border-radius: 16px;
             box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
             font-family: 'PilatWideWeb';
-
         }
 
         .flip-card:hover .flip-card-inner,
         .flip-card.flipped .flip-card-inner {
             transform: rotateY(180deg);
             font-family: 'PilatWideWeb';
-
         }
 
         .flip-card-front,
@@ -501,14 +587,13 @@
             width: 100%;
             height: 100%;
             backface-visibility: hidden;
-            border-radius: 16px;
+            border-radius: 0px 20px 0px 20px;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            justify-content: flex-start;
             padding: 20px;
             box-sizing: border-box;
             font-family: 'PilatWideWeb';
-
         }
 
         .flip-card-front.planeta {
@@ -539,12 +624,6 @@
             width: 100%;
         }
 
-        .card-icon-white {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
         .card-icon-white img.card-icon-img {
             width: 52px;
             height: 52px;
@@ -555,7 +634,7 @@
         .card-title-pill {
             background: #ffffff;
             padding: 8px 18px;
-            border-radius: 30px;
+            border-radius: 0px 10px 0px 10px;
             font-weight: 800;
             font-size: 0.85rem;
             display: inline-flex;
@@ -585,13 +664,14 @@
             text-align: center;
             margin: auto 0;
             font-weight: 500;
+            font-family: 'PilatWideWeb';
         }
 
         .card-btn-activities {
             background: #ffffff;
             border: none;
             padding: 10px 0;
-            border-radius: 30px;
+            border-radius: 0px 20px 0px 20px;
             font-weight: 800;
             font-size: 0.85rem;
             cursor: pointer;
@@ -646,7 +726,6 @@
             margin-bottom: 6px;
         }
 
-        /* Módulo Firma de Correo Estilizado */
         .signature-section {
             margin-top: 35px;
             background: #ffffff;
@@ -684,7 +763,7 @@
 
         .sig-tab-btn {
             background: #ffffff;
-            border: 2px solid #2c3e50;
+            border: 1px solid #2c3e50;
             color: #2c3e50;
             padding: 8px 22px;
             border-radius: 8px;
@@ -776,14 +855,14 @@
                             height="50"><span>CONDUCTA</span></div>
                 </div>
                 <div class="welcome-text" style="margin-top: 15px;">
-                    <p>Al finalizar, conocerás tu <strong> perfil de impacto </strong>y tendrás la oportunidad
-                        de<strong> inscribirte en
-                            actividades específicas del pilar </strong>que mejor te representa, además de llevarte un
-                        banner
-                        personalizado para tu firma de correo. <br><strong>¡Juntos podemos traducir nuestros
-                            compromisos en
-                            acciones
-                            concretas!</strong></p>
+                    <p>Al finalizar, conocerás tu perfil de impacto y podrás identificar las <strong>actividades que
+                            realizamos
+                            durante el año que mejor representan tus intereses y el pilar con el que más te
+                            identificás.</strong>
+                        Además, te llevarás un banner personalizado para tu firma de correo.
+
+                        <strong> ¡Juntos podemos traducir nuestros compromisos en acciones concretas!</strong>
+                    </p>
                 </div>
             </div>
             <div class="center-btn">
@@ -793,39 +872,120 @@
         </div>
 
         <div class="screen" id="screen-1">
-            <div class="step-indicator">Pantalla 1 de 5</div>
+            <div class="progress-sticky-bar">
+                <div class="progress-sticky-title">Pantalla 1 de 5</div>
+                <div class="progress-sticky-right">
+                    <span class="progress-text-label">Progreso 20%</span>
+                    <div class="progress-track">
+                        <div class="progress-fill" style="width: 20%;"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="step-indicator">
+                <h4>Podés seleccionar más de una opción. <br>Cuando estés listo, utilizá SIGUIENTE para avanzar. <br>Si
+                    necesitás revisar la pantalla anterior, seleccioná ANTERIOR.</h4>
+            </div>
             <div class="statement-list" id="list-1"></div>
-            <div class="btn-container"><button class="btn-dpworld" onclick="cambiarPantalla(1, 'welcome')"><span
-                        class="arrow-container">←</span> ANTERIOR</button><button class="btn-dpworld"
-                    onclick="cambiarPantalla(1, 2)">SIGUIENTE <span class="arrow-container">→</span></button></div>
+            <div class="btn-container">
+                <button class="btn-dpworld" onclick="cambiarPantalla(1, 'welcome')"><span
+                        class="arrow-container">←</span> ANTERIOR</button>
+                <button class="btn-dpworld" onclick="cambiarPantalla(1, 2)">SIGUIENTE <span
+                        class="arrow-container">→</span></button>
+            </div>
         </div>
+
         <div class="screen" id="screen-2">
-            <div class="step-indicator">Pantalla 2 de 5</div>
+            <div class="progress-sticky-bar">
+                <div class="progress-sticky-title">Pantalla 2 de 5</div>
+                <div class="progress-sticky-right">
+                    <span class="progress-text-label">Progreso 40%</span>
+                    <div class="progress-track">
+                        <div class="progress-fill" style="width: 40%;"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="step-indicator">
+                <h4>⚠️Podés seleccionar más de una opción. <br>Cuando estés listo, utilizá SIGUIENTE para avanzar.
+                    <br>Si
+                    necesitás revisar la pantalla anterior, seleccioná ANTERIOR.
+                </h4>
+            </div>
             <div class="statement-list" id="list-2"></div>
-            <div class="btn-container"><button class="btn-dpworld" onclick="cambiarPantalla(2, 1)"><span
-                        class="arrow-container">←</span> ANTERIOR</button><button class="btn-dpworld"
-                    onclick="cambiarPantalla(2, 3)">SIGUIENTE <span class="arrow-container">→</span></button></div>
+            <div class="btn-container">
+                <button class="btn-dpworld" onclick="cambiarPantalla(2, 1)"><span class="arrow-container">←</span>
+                    ANTERIOR</button>
+                <button class="btn-dpworld" onclick="cambiarPantalla(2, 3)">SIGUIENTE <span
+                        class="arrow-container">→</span></button>
+            </div>
         </div>
+
         <div class="screen" id="screen-3">
-            <div class="step-indicator">Pantalla 3 de 5</div>
+            <div class="progress-sticky-bar">
+                <div class="progress-sticky-title">Pantalla 3 de 5</div>
+                <div class="progress-sticky-right">
+                    <span class="progress-text-label">Progreso 60%</span>
+                    <div class="progress-track">
+                        <div class="progress-fill" style="width: 60%;"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="step-indicator">
+                <h4>Podés seleccionar más de una opción. <br>Cuando estés listo, utilizá SIGUIENTE para avanzar. <br>Si
+                    necesitás revisar la pantalla anterior, seleccioná ANTERIOR.</h4>
+            </div>
             <div class="statement-list" id="list-3"></div>
-            <div class="btn-container"><button class="btn-dpworld" onclick="cambiarPantalla(3, 2)"><span
-                        class="arrow-container">←</span> ANTERIOR</button><button class="btn-dpworld"
-                    onclick="cambiarPantalla(3, 4)">SIGUIENTE <span class="arrow-container">→</span></button></div>
+            <div class="btn-container">
+                <button class="btn-dpworld" onclick="cambiarPantalla(3, 2)"><span class="arrow-container">←</span>
+                    ANTERIOR</button>
+                <button class="btn-dpworld" onclick="cambiarPantalla(3, 4)">SIGUIENTE <span
+                        class="arrow-container">→</span></button>
+            </div>
         </div>
+
         <div class="screen" id="screen-4">
-            <div class="step-indicator">Pantalla 4 de 5</div>
+            <div class="progress-sticky-bar">
+                <div class="progress-sticky-title">Pantalla 4 de 5</div>
+                <div class="progress-sticky-right">
+                    <span class="progress-text-label">Progreso 80%</span>
+                    <div class="progress-track">
+                        <div class="progress-fill" style="width: 80%;"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="step-indicator">
+                <h4>Podés seleccionar más de una opción. <br>Cuando estés listo, utilizá SIGUIENTE para avanzar. <br>Si
+                    necesitás revisar la pantalla anterior, seleccioná ANTERIOR.</h4>
+            </div>
             <div class="statement-list" id="list-4"></div>
-            <div class="btn-container"><button class="btn-dpworld" onclick="cambiarPantalla(4, 3)"><span
-                        class="arrow-container">←</span> ANTERIOR</button><button class="btn-dpworld"
-                    onclick="cambiarPantalla(4, 5)">SIGUIENTE <span class="arrow-container">→</span></button></div>
+            <div class="btn-container">
+                <button class="btn-dpworld" onclick="cambiarPantalla(4, 3)"><span class="arrow-container">←</span>
+                    ANTERIOR</button>
+                <button class="btn-dpworld" onclick="cambiarPantalla(4, 5)">SIGUIENTE <span
+                        class="arrow-container">→</span></button>
+            </div>
         </div>
+
         <div class="screen" id="screen-5">
-            <div class="step-indicator">Pantalla 5 de 5</div>
+            <div class="progress-sticky-bar">
+                <div class="progress-sticky-title">Pantalla 5 de 5</div>
+                <div class="progress-sticky-right">
+                    <span class="progress-text-label">Progreso 100%</span>
+                    <div class="progress-track">
+                        <div class="progress-fill" style="width: 100%;"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="step-indicator">
+                <h4>Podés seleccionar más de una opción. <br>Cuando estés listo, utilizá SIGUIENTE para avanzar. <br>Si
+                    necesitás revisar la pantalla anterior, seleccioná ANTERIOR.</h4>
+            </div>
             <div class="statement-list" id="list-5"></div>
-            <div class="btn-container"><button class="btn-dpworld" onclick="cambiarPantalla(5, 4)"><span
-                        class="arrow-container">←</span> ANTERIOR</button><button class="btn-dpworld"
-                    onclick="calcularResultados()">VER RESULTADOS <span class="arrow-container">→</span></button></div>
+            <div class="btn-container">
+                <button class="btn-dpworld" onclick="cambiarPantalla(5, 4)"><span class="arrow-container">←</span>
+                    ANTERIOR</button>
+                <button class="btn-dpworld" onclick="calcularResultados()">VER RESULTADOS <span
+                        class="arrow-container">→</span></button>
+            </div>
         </div>
 
         <div class="screen results-section" id="screen-results">
@@ -834,11 +994,6 @@
             <div class="pillars-breakdown" id="pillarsBreakdownContainer"></div>
 
             <div id="mainPillarSection"></div>
-
-            <div class="activities-module">
-                <h3>ESTAS SON LAS ACTIVIDADES QUE TENEMOS PENSADAS PARA VOS</h3>
-                <ul class="activities-list" id="activitiesListContent"></ul>
-            </div>
 
             <div class="other-pillars-section">
                 <h3>CONOCÉ LOS DEMÁS PILARES</h3>
@@ -869,31 +1024,31 @@
 
     <script>
         const poolAfirmaciones = [
-            { text: "Siempre pienso en cómo reducir mi impacto en el ambiente.", pillar: "planeta", screen: 1 },
-            { text: "Me gusta ayudar a que quienes me rodean se sientan parte del equipo.", pillar: "personas", screen: 1 },
-            { text: "Me gusta participar en iniciativas que generan un impacto positivo.", pillar: "comunidad", screen: 1 },
-            { text: "Me gusta actuar con responsabilidad y dar el ejemplo.", pillar: "conducta", screen: 1 },
-            { text: "Soy consciente y reutilizo todo lo que puedo", pillar: "planeta", screen: 1 },
-            { text: "Disfruto aprender cosas nuevas y compartirlas con los demás.", pillar: "personas", screen: 2 },
-            { text: "Disfruto colaborar cuando alguien necesita una mano.", pillar: "comunidad", screen: 2 },
-            { text: "Creo que la confianza se construye con acciones, no con palabras.", pillar: "conducta", screen: 2 },
-            { text: "Creo que las pequeñas acciones pueden generar grandes cambios.", pillar: "planeta", screen: 2 },
-            { text: "Me motiva ver crecer a las personas.", pillar: "personas", screen: 2 },
-            { text: "Me interesa que mi trabajo también tenga un impacto fuera de la empresa.", pillar: "comunidad", screen: 3 },
-            { text: "Creo que el respeto es la base de cualquier relación.", pillar: "conducta", screen: 3 },
-            { text: "Me preocupa el futuro del planeta y quiero contribuir a cuidarlo.", pillar: "planeta", screen: 3 },
-            { text: "Cuando veo una situación de riesgo, freno la actividad y le aviso a superior", pillar: "personas", screen: 3 },
-            { text: "Pienso que juntos logramos cambios más grandes que individualmente", pillar: "comunidad", screen: 3 },
-            { text: "Considero que un buen clima laboral hace la diferencia.", pillar: "conducta", screen: 4 },
-            { text: "Las actividades de sustentabilidad que más me gustan son las que tienen impacto ambiental como Limpieza de Costas.", pillar: "planeta", screen: 4 },
-            { text: "Las actividades de sustentabilidad que más me gustan involucran mi bienestar, como la Carrera Verde.", pillar: "personas", screen: 4 },
-            { text: "Las actividades que más disfruto generan cambio positivo a comunidades como el Programa de Educación.", pillar: "comunidad", screen: 4 },
-            { text: "Las actividades que me interesan se enfocan en mejorar el clima laboral, como la capacitación del convenio 190.", pillar: "conducta", screen: 4 },
-            { text: "Busco constantemente formas de optimizar procesos sin descuidar los recursos naturales.", pillar: "planeta", screen: 5 },
-            { text: "Fomento un espacio seguro donde cada colaborador pueda expresar sus ideas libremente.", pillar: "personas", screen: 5 },
-            { text: "Dedico tiempo a identificar necesidades en el entorno social que nos rodea.", pillar: "comunidad", screen: 5 },
-            { text: "Tomo decisiones basadas en principios éticos sólidos, incluso bajo presión.", pillar: "conducta", screen: 5 },
-            { text: "Me comprometo activamente con las metas ecológicas a largo plazo de la organización.", pillar: "planeta", screen: 5 }
+            {text: "Siempre pienso en cómo reducir mi impacto en el ambiente.", pillar: "planeta", screen: 1},
+            {text: "Me gusta ayudar a que quienes me rodean se sientan parte del equipo.", pillar: "personas", screen: 1},
+            {text: "Me gusta participar en iniciativas que generan un impacto positivo.", pillar: "comunidad", screen: 1},
+            {text: "Me gusta actuar con responsabilidad y dar el ejemplo.", pillar: "conducta", screen: 1},
+            {text: "Soy consciente y reutilizo todo lo que puedo", pillar: "planeta", screen: 1},
+            {text: "Disfruto aprender cosas nuevas y compartirlas con los demás.", pillar: "personas", screen: 2},
+            {text: "Disfruto colaborar cuando alguien necesita una mano.", pillar: "comunidad", screen: 2},
+            {text: "Creo que la confianza se construye con acciones, no con palabras.", pillar: "conducta", screen: 2},
+            {text: "Creo que las pequeñas acciones pueden generar grandes cambios.", pillar: "planeta", screen: 2},
+            {text: "Me motiva ver crecer a las personas.", pillar: "personas", screen: 2},
+            {text: "Me interesa que mi trabajo también tenga un impacto fuera de la empresa.", pillar: "comunidad", screen: 3},
+            {text: "Creo que el respeto es la base de cualquier relación.", pillar: "conducta", screen: 3},
+            {text: "Me preocupa el futuro del planeta y quiero contribuir a cuidarlo.", pillar: "planeta", screen: 3},
+            {text: "Cuando veo una situación de riesgo, freno la actividad y le aviso a superior", pillar: "personas", screen: 3},
+            {text: "Pienso que juntos logramos cambios más grandes que individualmente", pillar: "comunidad", screen: 3},
+            {text: "Considero que un buen clima laboral hace la diferencia.", pillar: "conducta", screen: 4},
+            {text: "Las actividades de sustentabilidad que más me gustan son las que tienen impacto ambiental como Limpieza de Costas.", pillar: "planeta", screen: 4},
+            {text: "Las actividades de sustentabilidad que más me gustan involucran mi bienestar, como la Carrera Verde.", pillar: "personas", screen: 4},
+            {text: "Las actividades que más disfruto generan cambio positivo a comunidades como el Programa de Educación.", pillar: "comunidad", screen: 4},
+            {text: "Las actividades que me interesan se enfocan en mejorar el clima laboral, como la capacitación del convenio 190.", pillar: "conducta", screen: 4},
+            {text: "Busco constantemente formas de optimizar procesos sin descuidar los recursos naturales.", pillar: "planeta", screen: 5},
+            {text: "Fomento un espacio seguro donde cada colaborador pueda expresar sus ideas libremente.", pillar: "personas", screen: 5},
+            {text: "Dedico tiempo a identificar necesidades en el entorno social que nos rodea.", pillar: "comunidad", screen: 5},
+            {text: "Tomo decisiones basadas en principios éticos sólidos, incluso bajo presión.", pillar: "conducta", screen: 5},
+            {text: "Me comprometo activamente con las metas ecológicas a largo plazo de la organización.", pillar: "planeta", screen: 5}
         ];
 
         const datosPilares = {
@@ -901,29 +1056,29 @@
                 nombre: "PLANETA",
                 iconoImg: "img/01_planeta.png",
                 explicacionParaPersonas: "Cuidamos nuestro entorno para garantizar un futuro sostenible.",
-                actividades: ["Voluntariado de Plantación de Árboles", "Voluntariado de Limpieza de Costas", "Capacitación de Regeneración"],
-                bannerImg: "firmas_pilares_firm01.png"
+                actividades: ["Voluntariado de Plantación de Árboles", "Voluntariado de Limpieza de Costas", "Capacitación de Regeneración", "Semana de la Sustentabilidad", "Carrera Verde de Fundación Favaloro"],
+                bannerImg: "img/firmas_pilares_firm01.png"
             },
             personas: {
                 nombre: "PERSONAS",
                 iconoImg: "img/02_personas.png",
                 explicacionParaPersonas: "Promovemos la salud, seguridad y el desarrollo de nuestros colaboradores desde el respeto y la equidad.",
                 actividades: ["Comité de Sustentabilidad", "Taller Día de la Mujer"],
-                bannerImg: "firmas_pilares-02.png"
+                bannerImg: "img/firmas_pilares-02.png"
             },
             comunidad: {
                 nombre: "COMUNIDAD",
                 iconoImg: "img/03_comunidad.png",
                 explicacionParaPersonas: "Generamos impacto positivo en las comunidades donde operamos a través de la responsabilidad social corporativa.",
-                actividades: ["Programa de Educación", "Voluntariado Día de la Niñez", "Campaña de Donación de Sangre"],
-                bannerImg: "firmas_pilares-03.png"
+                actividades: ["Programa de Educación", "Voluntariado Día de la Niñez", "Campaña de Donación de Sangre", "Día Internacional del Voluntariado", "Día Internacional de la Alfabetización"],
+                bannerImg: "img/firmas_pilares-03.png"
             },
             conducta: {
                 nombre: "CONDUCTA",
                 iconoImg: "img/04_conducta.png",
                 explicacionParaPersonas: "Actuamos con integridad, transparencia y responsabilidad en cada decisión y acción.",
                 actividades: ["Talleres CONVENIO 190 - OIT 'Violencia y Acoso Laboral'"],
-                bannerImg: "firmas_pilares-04.png"
+                bannerImg: "img/firmas_pilares-04.png"
             }
         };
 
@@ -951,7 +1106,7 @@
             let siguienteId = (siguiente === 'welcome') ? 'screen-welcome' : `screen-${siguiente}`;
             document.getElementById(actualId).classList.remove('active');
             document.getElementById(siguienteId).classList.add('active');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            window.scrollTo({top: 0, behavior: 'smooth'});
         }
 
         function cambiarBannerFirma(pilarId) {
@@ -975,7 +1130,7 @@
         }
 
         function calcularResultados() {
-            const totales = { planeta: 0, personas: 0, comunidad: 0, conducta: 0 };
+            const totales = {planeta: 0, personas: 0, comunidad: 0, conducta: 0};
             const seleccionadas = document.querySelectorAll('.statement-item input[type="checkbox"]:checked');
 
             if (seleccionadas.length === 0) {
@@ -989,7 +1144,6 @@
 
             const totalSelecciones = seleccionadas.length;
 
-            // 1. Calcular porcentajes exactos (con decimales)
             let porcentajesExactos = {
                 planeta: (totales.planeta / totalSelecciones) * 100,
                 personas: (totales.personas / totalSelecciones) * 100,
@@ -997,7 +1151,6 @@
                 conducta: (totales.conducta / totalSelecciones) * 100
             };
 
-            // 2. Aplicar el método de "Mayor Resto" para que sumen exactamente 100%
             let porcentajesFinales = {};
             let restos = [];
             let sumaEnteros = 0;
@@ -1006,7 +1159,7 @@
                 let valorEntero = Math.floor(porcentajesExactos[p]);
                 porcentajesFinales[p] = valorEntero;
                 sumaEnteros += valorEntero;
-                restos.push({ id: p, resto: porcentajesExactos[p] - valorEntero });
+                restos.push({id: p, resto: porcentajesExactos[p] - valorEntero});
             }
 
             restos.sort((a, b) => b.resto - a.resto);
@@ -1016,7 +1169,7 @@
                 porcentajesFinales[restos[i].id]++;
             }
 
-            const porcentajesArray = Object.keys(porcentajesFinales).map(k => ({ id: k, val: porcentajesFinales[k] }));
+            const porcentajesArray = Object.keys(porcentajesFinales).map(k => ({id: k, val: porcentajesFinales[k]}));
             porcentajesArray.sort((a, b) => b.val - a.val);
 
             const breakdownContainer = document.getElementById('pillarsBreakdownContainer');
@@ -1042,30 +1195,29 @@
             principales.forEach(item => {
                 const pilarInfo = datosPilares[item.id];
                 const cardDiv = document.createElement('div');
-                cardDiv.className = `main-pillar-card ${item.id}`;
+                cardDiv.className = `main-pillar-card-wrapper ${item.id}`;
                 cardDiv.innerHTML = `
-                    <div class="main-pillar-header">
-                        <img src="${pilarInfo.iconoImg}" class="card-icon-img" alt="">
-                        <span>PILAR PRINCIPAL: ${pilarInfo.nombre} (${item.val}%)</span>
+                    <div class="main-pillar-top">
+                        <div class="main-pillar-header-left">
+                            <img src="${pilarInfo.iconoImg}" class="card-icon-img" alt="">
+                            <span>PILAR PRINCIPAL: ${pilarInfo.nombre} (${item.val}%)</span>
+                        </div>
+                        <button class="btn-q-significa" onclick="const expl = this.closest('.main-pillar-card-wrapper').querySelector('.pillar-explanation-content'); expl.classList.toggle('show'); this.innerHTML = expl.classList.contains('show') ? '¿Qué significa? ▲' : '¿Qué significa? ▼';">
+                            ¿Qué significa? ▼
+                        </button>
                     </div>
-                    <p style="margin: 0; line-height: 1.6; font-size: 1.05rem;color:#fff;">Para nosotros, el pilar ${pilarInfo.nombre} significa: ${pilarInfo.explicacionParaPersonas}</p>
+                    <div class="pillar-explanation-content">
+                        <strong>Para nosotros, este pilar significa:</strong> ${pilarInfo.explicacionParaPersonas}
+                    </div>
+                    <div class="activities-inner-section">
+                        <h3>ACTIVIDADES RELACIONADAS A TU PERFIL</h3>
+                        <ul class="activities-list">
+                            ${pilarInfo.actividades.map(act => `<li>${act}</li>`).join('')}
+                        </ul>
+                    </div>
                 `;
                 mainPillarSection.appendChild(cardDiv);
             });
-
-            // 3. Actividades diferenciadas por pilar con sus colores correspondientes
-            let actividadesHTML = '';
-            principales.forEach(item => {
-                const pInfo = datosPilares[item.id];
-                actividadesHTML += `
-                <li style="list-style: none; margin-bottom: 15px; margin-left: -20px;">
-                    <strong style="color: var(--color-${item.id}); font-size: 1.05rem;">${pInfo.nombre}:</strong>
-                    <ul style="margin-top: 5px; padding-left: 20px;">
-                        ${pInfo.actividades.map(act => `<li>${act}</li>`).join('')}
-                    </ul>
-                </li>`;
-            });
-            document.getElementById('activitiesListContent').innerHTML = actividadesHTML;
 
             const otherContainer = document.getElementById('otherPillarsContainer');
             otherContainer.innerHTML = '';
@@ -1082,12 +1234,12 @@
                                 <div class="card-title-pill">${p.nombre}</div>
                             </div>
                             <div class="card-body-text">${p.explicacionParaPersonas}</div>
-                            <button class="card-btn-activities" onclick="this.closest('.flip-card').classList.toggle('flipped')">ACTIVIDADES</button>
+                            <button class="card-btn-activities" onclick="this.closest('.flip-card').classList.toggle('flipped')">ACTIVIDADES RELACIONADAS</button>
                         </div>
                         <div class="flip-card-back">
-                            <h4>Actividades - ${p.nombre}</h4>
+                            <h4>Actividades Relacionadas- ${p.nombre}</h4>
                             <ul>${p.actividades.map(a => `<li>${a}</li>`).join('')}</ul>
-                            <button class="card-btn-activities" style="margin-top:auto;" onclick="this.closest('.flip-card').classList.remove('flipped')">VOLVER</button>
+                           
                         </div>
                     </div>
                 `;
@@ -1105,7 +1257,7 @@
 
             document.getElementById('screen-5').classList.remove('active');
             document.getElementById('screen-results').classList.add('active');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            window.scrollTo({top: 0, behavior: 'smooth'});
         }
 
         window.onload = inicializarTest;
@@ -1113,4 +1265,3 @@
 </body>
 
 </html>
-```[cite: 1]
